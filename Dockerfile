@@ -1,4 +1,4 @@
-FROM fukamachi/sbcl:2.1.9-ubuntu
+FROM fukamachi/sbcl:2.3.0-ubuntu
 
 RUN apt-get update && apt-get install -y make bzip2 wget
 
