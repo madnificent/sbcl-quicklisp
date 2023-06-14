@@ -1,10 +1,22 @@
 pipeline:
-  build-and-push:
-    image: plugins/docker
+  build-and-push-amd64:
+    image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: "${CI_REPO_OWNER}/${CI_REPO_NAME%%-service}"
       tags: latest
+      platforms: amd64
     secrets: [docker_username, docker_password]
     when:
-      event: push
-      branch: [master, main]
+      platform: linux/amd64
+  build-and-push-arm64:
+    image: woodpeckerci/plugin-docker-buildx
+    settings:
+      repo: "${CI_REPO_OWNER}/${CI_REPO_NAME%%-service}"
+      tags: latest
+      platforms: arm64
+    secrets: [docker_username, docker_password]
+    when:
+      platform: linux/arm64
+when:
+  event: push
+  branch: [master, main]
